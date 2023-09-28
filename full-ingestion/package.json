@@ -1,0 +1,37 @@
+{
+  "name": "full-ingestion",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "src/index.js",
+  "private": true,
+  "scripts": {
+    "start": "node src/index.js",
+    "start:dev": "node_modules/.bin/nodemon -q src/index.js",
+    "lint": "node_modules/.bin/eslint src --ext .js",
+    "prettier": "node_modules/.bin/prettier --write '**/*.{js,ts}'",
+    "test": "echo Comment: It is npm command dedicated for running test in connect service",
+    "test:ci": "node_modules/.bin/jest --config jest.config.cjs"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.22.10",
+    "@babel/preset-env": "^7.22.10",
+    "babel-jest": "^29.6.2",
+    "eslint": "^8.46.0",
+    "jest": "^29.6.2",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.8.8"
+  },
+  "dependencies": {
+    "@commercetools-backend/loggers": "^21.19.0",
+    "@commercetools/platform-sdk": "^4.1.0",
+    "@commercetools/sdk-client-v2": "^2.2.0",
+    "algoliasearch": "^4.19.1",
+    "body-parser": "^1.20.1",
+    "dotenv": "^16.0.3",
+    "express": "4.18.2",
+    "supertest": "^6.3.3",
+    "validator": "^13.11.0"
+  }
+}
