@@ -31,6 +31,9 @@ incremental-updater/**/yarn.lock
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
-incremental-updater/starter-typescript/job/.env
-incremental-updater/starter-typescript/job/.env.*
-!incremental-updater/starter-typescript/job/.env.example
+incremental-updater/.env
+incremental-updater/.env.*
+!incremental-updater/.env.example
+full-ingestion/.env
+full-ingestion/.env.*
+!full-ingestion/.env.example
