@@ -1,0 +1,67 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build-incremental-updater:
+    name: Build the application for incremental-updater
+    runs-on: ubuntu-latest
+    env:
+      CTP_CLIENT_ID: ${{ secrets.CTP_CLIENT_ID }}
+      CTP_CLIENT_SECRET: ${{ secrets.CTP_CLIENT_SECRET }}
+      CTP_PROJECT_KEY: ${{ secrets.CTP_PROJECT_KEY }}
+      CTP_SCOPE: ${{ secrets.CTP_SCOPE }}
+      CTP_REGION: ${{ secrets.CTP_REGION }}
+      CTP_STORE_KEY: ${{ secrets.CTP_STORE_KEY }}
+      SEARCH_PLATFORM_CONFIG: ${{ secrets.SEARCH_PLATFORM_CONFIG }}
+    defaults:
+      run:
+        working-directory: incremental-updater
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+
+      - name: Install modules
+        run: npm ci
+
+      - name: Check the coding style
+        run: npm run lint && npm run prettier
+
+      - name: Execute integration test
+        run: npm run test:ci
+
+  build-full-ingestion:
+    name: Build the application for full-ingestion
+    runs-on: ubuntu-latest
+    env:
+      CTP_CLIENT_ID: ${{ secrets.CTP_CLIENT_ID }}
+      CTP_CLIENT_SECRET: ${{ secrets.CTP_CLIENT_SECRET }}
+      CTP_PROJECT_KEY: ${{ secrets.CTP_PROJECT_KEY }}
+      CTP_SCOPE: ${{ secrets.CTP_SCOPE }}
+      CTP_REGION: ${{ secrets.CTP_REGION }}
+      SEARCH_PLATFORM_CONFIG: ${{ secrets.SEARCH_PLATFORM_CONFIG }}
+    defaults:
+      run:
+        working-directory: full-ingestion
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+
+      - name: Install modules
+        run: npm ci
+
+      - name: Check the coding style
+        run: npm run lint && npm run prettier
+
+      - name: Execute integration test
+        run: npm run test:ci
