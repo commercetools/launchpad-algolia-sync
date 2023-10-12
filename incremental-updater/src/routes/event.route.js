@@ -1,7 +1,5 @@
 import { Router } from 'express';
 
-import { eventHandler as storeEventHandler } from '../controllers/store.event.controller.js';
-import { eventHandler as productSelectionEventHandler } from '../controllers/product-selection.event.controller.js';
 import { eventHandler as productEventHandler } from '../controllers/product.event.controller.js';
 import CustomError from '../errors/custom.error.js';
 import { logger } from '../utils/logger.utils.js';
@@ -38,12 +36,6 @@ async function eventHandler(request, response) {
     const resourceType = messageBody?.resource?.typeId;
 
     switch (resourceType) {
-      case 'store':
-        await storeEventHandler(request, response);
-        break;
-      case 'product-selection':
-        await productSelectionEventHandler(request, response);
-        break;
       case 'product':
         await productEventHandler(request, response);
         break;
