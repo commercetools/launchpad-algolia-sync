@@ -63,7 +63,7 @@ function transformVariant(variant) {
 
     discountedPrices = variant?.prices.map((price) => price.discounted);
     if (discountedPrices) {
-      discountedPrices = transformDiscountedPrices(discountedPrices);
+      discountedPrices = transformPrices(discountedPrices);
     }
   }
 
