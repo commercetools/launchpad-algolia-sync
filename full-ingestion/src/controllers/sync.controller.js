@@ -1,7 +1,6 @@
 import { logger } from '../utils/logger.utils.js';
 import {
-  getProductsInCurrentStore,
-  getProductProjectionInStoreById,
+  getProductProjections
 } from '../clients/query.client.js';
 import CustomError from '../errors/custom.error.js';
 import {
@@ -15,52 +14,20 @@ import {
   HTTP_STATUS_SUCCESS_NO_CONTENT,
 } from '../constants/http.status.constants.js';
 
-async function syncProducts(storeKey) {
-  let productsToBeSynced = [];
-  const products = await getProductsInCurrentStore(storeKey);
+async function syncProducts() {
+
+  const productProjectionsToBeSynced = await getProductProjections();
 
   //Clean up search index before full sychronization
-  const productIdsToBeRemoved = products.map((product) => product.id);
+  const productIdsToBeRemoved = productProjectionsToBeSynced.map((product) => product.id);
   await removeProducts(productIdsToBeRemoved);
 
-  for (let productInCurrentStore of products) {
-    let productToBeSynced = undefined;
-    productToBeSynced = await getProductProjectionInStoreById(
-      storeKey,
-      productInCurrentStore.id
-    ).catch(async (error) => {
-      // Product cannot be found in store assignment. Need to remove product in external search index
-      if (error.statusCode === HTTP_STATUS_RESOURCE_NOT_FOUND) {
-        logger.info(
-          `Product "${productInCurrentStore.id}" is not found in the current store. The product will not be synchronized to the search index.`
-        );
-      } else {
-        throw new CustomError(
-          HTTP_STATUS_SUCCESS_ACCEPTED,
-          error.message,
-          error
-        );
-      }
-    });
+  logger.info(
+      `${productProjectionsToBeSynced.length} product(s) to be synced to search index.`
+  );
 
-    // Check if product ID has already been existing in the list
-    if (productToBeSynced) {
-      const isDuplicatedProduct =
-        productsToBeSynced.filter(
-          (product) => product.id === productToBeSynced.id
-        ).length > 0;
-      if (isDuplicatedProduct)
-        logger.info(`${productToBeSynced.id} is duplicated.`);
-      if (!isDuplicatedProduct)
-        productsToBeSynced = productsToBeSynced.concat(productToBeSynced);
-    }
-  }
-
-  if (productsToBeSynced.length > 0) {
-    logger.info(
-      `${productsToBeSynced.length} product(s) to be synced to search index.`
-    );
-    await saveProducts(productsToBeSynced).catch((error) => {
+  if (productProjectionsToBeSynced.length > 0) {
+    await saveProducts(productProjectionsToBeSynced).catch((error) => {
       throw new CustomError(
         HTTP_STATUS_BAD_REQUEST,
         `Bad request: ${error.message}`,
@@ -73,15 +40,7 @@ async function syncProducts(storeKey) {
 
 export const syncHandler = async (request, response) => {
   try {
-    const storeKey = request.params.storeKey;
-    if (!storeKey) {
-      logger.error('Missing store key in query parameter.');
-      throw new CustomError(
-        HTTP_STATUS_BAD_REQUEST,
-        'Bad request: No store key is defined in query parameter'
-      );
-    }
-    await syncProducts(storeKey);
+    await syncProducts();
   } catch (err) {
     logger.error(err);
     if (err.statusCode) return response.status(err.statusCode).send(err);
