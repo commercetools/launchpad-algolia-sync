@@ -8,6 +8,19 @@ export const productQueryArgs = {
   expand: ['productSelection', 'taxCategory', 'productType', 'categories[*]'],
 };
 
+async function getProductProjectionById(productId) {
+  return await createApiRoot()
+    .productProjections()
+    .withId({
+      ID: Buffer.from(productId).toString(),
+    })
+    .get({ productQueryArgs })
+    .execute()
+    .then((response) => {
+      return response.body;
+    });
+}
+
 export async function getProductProjectionInStoreById(productId) {
   const queryArgs = productQueryArgs;
   return await createApiRoot()
@@ -20,5 +33,5 @@ export async function getProductProjectionInStoreById(productId) {
     })
     .get({ queryArgs })
     .execute()
-    .then((response) => response.body);
+    .then((response) => getProductProjectionById(response.body.id));
 }

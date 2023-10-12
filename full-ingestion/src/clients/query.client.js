@@ -10,6 +10,19 @@ const queryArgs = {
   expand: ['productSelection', 'taxCategory', 'productType', 'categories[*]'],
 };
 
+async function getProductProjectionById(productId) {
+  return await createApiRoot()
+    .productProjections()
+    .withId({
+      ID: Buffer.from(productId).toString(),
+    })
+    .get({ queryArgs })
+    .execute()
+    .then((response) => {
+      return response.body;
+    });
+}
+
 export async function getProductProjectionInStoreById(storeKey, productId) {
   return await createApiRoot()
     .inStoreKeyWithStoreKeyValue({
@@ -21,7 +34,7 @@ export async function getProductProjectionInStoreById(storeKey, productId) {
     })
     .get({ queryArgs })
     .execute()
-    .then((response) => response.body);
+    .then((response) => getProductProjectionById(response.body.id)); // USD price is unexpectedly absent from inStoreKeyWithStoreKeyValue response, therefore it has to retrieve product projection once more as workaround before SDK is fixed.
 }
 
 export async function getProductsInCurrentStore(storeKey) {
