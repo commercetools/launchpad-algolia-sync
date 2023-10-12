@@ -15,7 +15,7 @@ export default function map(product) {
   }
   mappedProduct.objectID = product.id;
   mappedProduct.productId = product.id;
-  mappedProduct.name = product.name['en-GB'];
+  mappedProduct.name = product.name['en-US'];
 
   mappedProduct.categories = categories;
   mappedProduct.variants = variants;
@@ -23,9 +23,9 @@ export default function map(product) {
 }
 
 function transformAttribute(attribute) {
-  if (attribute.name && attribute.value['en-GB'])
+  if (attribute.name && attribute.value['en-US'])
     return {
-      [attribute.name]: attribute.value['en-GB'],
+      [attribute.name]: attribute.value['en-US'],
     };
 }
 
@@ -35,16 +35,49 @@ function transformAttributes(attributes) {
     .filter((attribute) => attribute !== undefined);
 }
 
+function transformPrices(prices) {
+  let transformedPrices = {};
+
+  prices.forEach((price) => {
+    if (price) {
+      transformedPrices[price.value.currencyCode] = {
+        centAmount: price.value.centAmount,
+        fractionDigits: price.value.fractionDigits,
+      };
+    }
+  });
+
+  if (JSON.stringify(transformedPrices) === '{}') {
+    return undefined;
+  }
+  return transformedPrices;
+}
+
 function transformVariant(variant) {
   let images = variant.images.map((image) => image.url);
   let attributes = transformAttributes(variant.attributes);
-  return {
+  let prices;
+  let discountedPrices;
+  if (variant.prices) {
+    prices = transformPrices(variant.prices);
+
+    discountedPrices = variant?.prices.map((price) => price.discounted);
+    if (discountedPrices) {
+      discountedPrices = transformPrices(discountedPrices);
+    }
+  }
+
+  let result = {
     id: variant.id,
     sku: variant.sku,
     images,
     attributes,
+    prices: !prices ? undefined : prices,
+    discountedPrices: !discountedPrices ? undefined : discountedPrices,
     isOnStock: variant.availability?.isOnStock,
     availableQuantity: variant.availability?.availableQuantity,
     version: variant.availability?.version,
   };
+  result = JSON.parse(JSON.stringify(result));
+  return result;
 }

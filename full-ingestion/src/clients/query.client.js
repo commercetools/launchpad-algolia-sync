@@ -10,6 +10,7 @@ const queryArgs = {
   expand: ['productSelection', 'taxCategory', 'productType', 'categories[*]'],
 };
 
+
 export async function getProductProjections() {
   let lastProductId = undefined;
   let hasNextQuery = true;
