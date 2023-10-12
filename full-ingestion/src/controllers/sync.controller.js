@@ -1,29 +1,26 @@
 import { logger } from '../utils/logger.utils.js';
-import {
-  getProductProjections
-} from '../clients/query.client.js';
+import { getProductProjections } from '../clients/query.client.js';
 import CustomError from '../errors/custom.error.js';
 import {
   default as saveProducts,
   removeProducts,
 } from '../extensions/algolia-example/clients/client.js';
 import {
-  HTTP_STATUS_RESOURCE_NOT_FOUND,
-  HTTP_STATUS_SUCCESS_ACCEPTED,
   HTTP_STATUS_BAD_REQUEST,
   HTTP_STATUS_SUCCESS_NO_CONTENT,
 } from '../constants/http.status.constants.js';
 
 async function syncProducts() {
-
   const productProjectionsToBeSynced = await getProductProjections();
 
   //Clean up search index before full sychronization
-  const productIdsToBeRemoved = productProjectionsToBeSynced.map((product) => product.id);
+  const productIdsToBeRemoved = productProjectionsToBeSynced.map(
+    (product) => product.id
+  );
   await removeProducts(productIdsToBeRemoved);
 
   logger.info(
-      `${productProjectionsToBeSynced.length} product(s) to be synced to search index.`
+    `${productProjectionsToBeSynced.length} product(s) to be synced to search index.`
   );
 
   if (productProjectionsToBeSynced.length > 0) {

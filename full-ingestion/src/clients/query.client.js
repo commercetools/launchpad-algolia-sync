@@ -10,7 +10,6 @@ const queryArgs = {
   expand: ['productSelection', 'taxCategory', 'productType', 'categories[*]'],
 };
 
-
 export async function getProductProjections() {
   let lastProductId = undefined;
   let hasNextQuery = true;
@@ -22,17 +21,17 @@ export async function getProductProjections() {
     }
 
     let productChunk = await createApiRoot()
-        .productProjections()
-        .get({ queryArgs })
-        .execute()
-        .then((response) => response.body.results)
-        .catch((error) => {
-          throw new CustomError(
-              HTTP_STATUS_BAD_REQUEST,
-              `Bad request: ${error.message}`,
-              error
-          );
-        });
+      .productProjections()
+      .get({ queryArgs })
+      .execute()
+      .then((response) => response.body.results)
+      .catch((error) => {
+        throw new CustomError(
+          HTTP_STATUS_BAD_REQUEST,
+          `Bad request: ${error.message}`,
+          error
+        );
+      });
     hasNextQuery = productChunk.length == CHUNK_SIZE;
     if (productChunk.length > 0) {
       lastProductId = productChunk[productChunk.length - 1].id;
@@ -41,4 +40,3 @@ export async function getProductProjections() {
   }
   return allProducts;
 }
-
