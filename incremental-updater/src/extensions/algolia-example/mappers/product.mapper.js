@@ -35,28 +35,45 @@ function transformAttributes(attributes) {
     .filter((attribute) => attribute !== undefined);
 }
 
+function transformPrices(prices) {
+  let transformedPrices = {};
+
+  prices.forEach((price) => {
+    if (price) {
+      transformedPrices[price.value.currencyCode] = {
+        centAmount: price.value.centAmount,
+        fractionDigits: price.value.fractionDigits,
+      };
+    }
+  });
+
+  if (JSON.stringify(transformedPrices) === '{}') {
+    return undefined;
+  }
+  return transformedPrices;
+}
+
 function transformVariant(variant) {
   let images = variant.images.map((image) => image.url);
   let attributes = transformAttributes(variant.attributes);
-  let price;
-  let discounted;
+  let prices;
+  let discountedPrices;
   if (variant.prices) {
-    price = variant?.prices.filter(
-      (price) => price?.value.currencyCode === 'USD'
-    )[0];
-    discounted = variant?.prices.filter((price) => {
-      if (price?.discounted)
-        return price?.discounted?.value.currencyCode === 'USD';
-      return false;
-    })[0];
+    prices = transformPrices(variant.prices);
+
+    discountedPrices = variant?.prices.map((price) => price.discounted);
+    if (discountedPrices) {
+      discountedPrices = transformDiscountedPrices(discountedPrices);
+    }
   }
+
   let result = {
     id: variant.id,
     sku: variant.sku,
     images,
     attributes,
-    price: !price ? undefined : price.value,
-    discountedPrice: !discounted ? undefined : discounted.value,
+    prices: !prices ? undefined : prices,
+    discountedPrices: !discountedPrices ? undefined : discountedPrices,
     isOnStock: variant.availability?.isOnStock,
     availableQuantity: variant.availability?.availableQuantity,
     version: variant.availability?.version,
