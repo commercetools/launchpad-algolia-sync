@@ -1,7 +1,7 @@
 import CustomError from '../errors/custom.error.js';
 import envValidators from '../validators/env-var.validators.js';
 import { getValidateMessages } from '../validators/helpers.validators.js';
-
+import { logger } from './logger.utils.js';
 /**
  * Read the configuration env vars
  * (Add yours accordingly)
@@ -10,6 +10,8 @@ import { getValidateMessages } from '../validators/helpers.validators.js';
  */
 
 export const readConfiguration = () => {
+  logger.debug('***** readConfiguration *****')
+  logger.debug(process.env.THEGOODSTORE_LOCALE)
   const envVars = {
     clientId: process.env.CTP_CLIENT_ID,
     clientSecret: process.env.CTP_CLIENT_SECRET,
