@@ -139,3 +139,15 @@ export const region = (path, message) => [
     ],
   ],
 ];
+
+export const locale = (path, message) => [
+  path,
+  [
+    [
+      required(
+        required((value) => validator.isIn(value, ['en-US', 'en-GB', 'de-DE']))
+      ),
+      message,
+    ],
+  ],
+];

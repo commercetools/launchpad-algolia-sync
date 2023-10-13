@@ -9,8 +9,10 @@ import {
   HTTP_STATUS_BAD_REQUEST,
   HTTP_STATUS_SUCCESS_NO_CONTENT,
 } from '../constants/http.status.constants.js';
+import { readConfiguration } from '../utils/config.utils.js';
 
 async function syncProducts() {
+  const locale = readConfiguration().locale;
   const productProjectionsToBeSynced = await getProductProjections();
 
   //Clean up search index before full sychronization
@@ -24,7 +26,7 @@ async function syncProducts() {
   );
 
   if (productProjectionsToBeSynced.length > 0) {
-    await saveProducts(productProjectionsToBeSynced).catch((error) => {
+    await saveProducts(productProjectionsToBeSynced, locale).catch((error) => {
       throw new CustomError(
         HTTP_STATUS_BAD_REQUEST,
         `Bad request: ${error.message}`,
