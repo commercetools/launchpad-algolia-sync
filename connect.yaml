@@ -26,8 +26,6 @@ deployAs:
       preUndeploy: npm install && npm run connector:pre-undeploy
     configuration:
       securedConfiguration:
-        - key: CTP_STORE_KEY
-          description: Unique key of Commercetools Store
         - key: CTP_PROJECT_KEY
           description: Commercetools project key
         - key: CTP_CLIENT_ID
