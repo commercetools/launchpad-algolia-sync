@@ -9,7 +9,7 @@ import {
   default as saveProducts,
   remove as removeProduct,
 } from '../extensions/algolia-example/clients/client.js';
-import { readConfiguration } from '../../../full-ingestion/src/utils/config.utils.js';
+import { readConfiguration } from '../utils/config.utils.js';
 
 async function saveChangedProductToExtSearchIndex(productId, locale) {
   const productProjectionToBeSynced = await getProductProjectionById(
