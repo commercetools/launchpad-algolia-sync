@@ -1,4 +1,4 @@
-export default function map(product) {
+export default function map(product, locale) {
   let mappedProduct = {};
   let categories = product.categories.map((category) => {
     return {
@@ -15,23 +15,23 @@ export default function map(product) {
   }
   mappedProduct.objectID = product.id;
   mappedProduct.productId = product.id;
-  mappedProduct.name = product.name['en-US'];
+  mappedProduct.name = product.name[locale];
 
   mappedProduct.categories = categories;
   mappedProduct.variants = variants;
   return mappedProduct;
 }
 
-function transformAttribute(attribute) {
-  if (attribute.name && attribute.value['en-US'])
+function transformAttribute(attribute, locale) {
+  if (attribute.name && attribute.value[locale])
     return {
-      [attribute.name]: attribute.value['en-US'],
+      [attribute.name]: attribute.value[locale],
     };
 }
 
-function transformAttributes(attributes) {
+function transformAttributes(attributes, locale) {
   return attributes
-    .map((attribute) => transformAttribute(attribute))
+    .map((attribute) => transformAttribute(attribute, locale))
     .filter((attribute) => attribute !== undefined);
 }
 
