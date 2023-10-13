@@ -1,7 +1,7 @@
 import CustomError from '../errors/custom.error.js';
 import envValidators from '../validators/env-var.validators.js';
 import { getValidateMessages } from '../validators/helpers.validators.js';
-import { logger } from './logger.utils.js';
+
 /**
  * Read the configuration env vars
  * (Add yours accordingly)
