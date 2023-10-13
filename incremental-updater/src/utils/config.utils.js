@@ -10,15 +10,13 @@ import { logger } from './logger.utils.js';
  */
 
 export const readConfiguration = () => {
-  logger.debug('***** readConfiguration *****')
-  logger.debug(process.env.THEGOODSTORE_LOCALE)
   const envVars = {
     clientId: process.env.CTP_CLIENT_ID,
     clientSecret: process.env.CTP_CLIENT_SECRET,
     projectKey: process.env.CTP_PROJECT_KEY,
     scope: process.env.CTP_SCOPE,
     region: process.env.CTP_REGION,
-    locale: process.env.THEGOODSTORE_LOCALE,
+    locale: 'en-US',
   };
 
   const validationErrors = getValidateMessages(envValidators, envVars);
