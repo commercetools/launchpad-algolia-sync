@@ -9,8 +9,9 @@ import {
   default as saveProducts,
   remove as removeProduct,
 } from '../extensions/algolia-example/clients/client.js';
+import { readConfiguration } from '../utils/config.utils.js';
 
-async function saveChangedProductToExtSearchIndex(productId) {
+async function saveChangedProductToExtSearchIndex(productId, locale) {
   const productProjectionToBeSynced = await getProductProjectionById(
     productId
   ).catch(async (error) => {
@@ -27,7 +28,7 @@ async function saveChangedProductToExtSearchIndex(productId) {
     logger.info(
       `The changed product "${productId}" is assigned to the current store ${process.env.CTP_STORE_KEY}. Sync action is going to be performed now.`
     );
-    await saveProducts([productProjectionToBeSynced]);
+    await saveProducts([productProjectionToBeSynced], locale);
     logger.info(`Product "${productId}" has been added/updated.`);
   }
 }
@@ -60,12 +61,13 @@ export const eventHandler = async (request, response) => {
     logger.info(
       `sync product ${productId} with notification type ${notificationType}`
     );
+    const locale = readConfiguration().locale;
     switch (notificationType) {
       case 'ResourceUpdated':
-        await saveChangedProductToExtSearchIndex(productId);
+        await saveChangedProductToExtSearchIndex(productId, locale);
         break;
       case 'ResourceCreated':
-        await saveChangedProductToExtSearchIndex(productId);
+        await saveChangedProductToExtSearchIndex(productId, locale);
         break;
       case 'ResourceDeleted':
         await saveDeletedProductToExtSearchIndex(productId);

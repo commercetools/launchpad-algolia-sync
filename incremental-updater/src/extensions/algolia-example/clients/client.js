@@ -16,14 +16,14 @@ export const removeProducts = async (objectIDs) => {
   await index.deleteObjects(objectIDs);
 };
 
-export default async function save(products) {
+export default async function save(products, locale) {
   let productChunks = [];
 
   const client = algoliasearch(config.applicationId, config.searchApiKey);
   const index = client.initIndex(config.index);
 
   for (const product of products) {
-    productChunks.push(productMapping(product));
+    productChunks.push(productMapping(product, locale));
     if (
       productChunks.length === constants.CHUNK_LIMIT ||
       product === products[products.length - 1]

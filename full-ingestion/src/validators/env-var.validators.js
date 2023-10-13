@@ -3,6 +3,7 @@ import {
   standardString,
   standardKey,
   region,
+  locale,
 } from './helpers.validators.js';
 
 /**
@@ -48,6 +49,11 @@ const envValidators = [
   region(['region'], {
     code: 'InvalidRegion',
     message: 'Not a valid region.',
+    referencedBy: 'environmentVariables',
+  }),
+  locale(['locale'], {
+    code: 'InvalidLocale',
+    message: 'Not a valid locale.',
     referencedBy: 'environmentVariables',
   }),
 ];
