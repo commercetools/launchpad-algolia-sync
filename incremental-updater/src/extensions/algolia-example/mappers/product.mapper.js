@@ -1,3 +1,4 @@
+const CURRENCY_CODES = ['USD', 'EUR'];
 export default function map(product, locale) {
   let mappedProduct = {};
   let categories = product.categories.map((category) => {
@@ -10,7 +11,9 @@ export default function map(product, locale) {
     variants.push(transformVariant(product.masterVariant, locale));
 
   if (product.variants.length > 0) {
-    variants.push(product.variants.map((variant) => transformVariant(variant, locale)));
+    variants.push(
+      product.variants.map((variant) => transformVariant(variant, locale))
+    );
     variants = variants.flatMap((variant) => variant);
   }
   mappedProduct.objectID = product.id;
@@ -39,7 +42,7 @@ function transformPrices(prices) {
   let transformedPrices = {};
 
   prices.forEach((price) => {
-    if (price) {
+    if (price && CURRENCY_CODES.includes(price.value.currencyCode)) {
       transformedPrices[price.value.currencyCode] = {
         centAmount: price.value.centAmount,
         fractionDigits: price.value.fractionDigits,
