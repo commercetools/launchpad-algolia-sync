@@ -7,7 +7,7 @@ export default function map(product, locale) {
   });
   let variants = [];
   if (product.masterVariant)
-    variants.push(transformVariant(product.masterVariant));
+    variants.push(transformVariant(product.masterVariant, locale));
 
   if (product.variants.length > 0) {
     variants.push(product.variants.map((variant) => transformVariant(variant, locale)));
@@ -53,9 +53,9 @@ function transformPrices(prices) {
   return transformedPrices;
 }
 
-function transformVariant(variant) {
+function transformVariant(variant, locale) {
   let images = variant.images.map((image) => image.url);
-  let attributes = transformAttributes(variant.attributes);
+  let attributes = transformAttributes(variant.attributes, locale);
   let prices;
   let discountedPrices;
   if (variant.prices) {
@@ -79,5 +79,6 @@ function transformVariant(variant) {
     version: variant.availability?.version,
   };
   result = JSON.parse(JSON.stringify(result));
+  console.log(result)
   return result;
 }
