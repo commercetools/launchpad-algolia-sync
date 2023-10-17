@@ -1,14 +1,11 @@
-const PRODUCT_CHANGE_SUBSCRIPTION_KEY =
-  'thegoodstore-changed-product-subscription';
-
-export async function deleteChangedStoreSubscription(apiRoot) {
+export async function deleteChangedStoreSubscription(apiRoot, ctpSubscriptionKey) {
   const {
     body: { results: subscriptions },
   } = await apiRoot
     .subscriptions()
     .get({
       queryArgs: {
-        where: `key = "${PRODUCT_CHANGE_SUBSCRIPTION_KEY}"`,
+        where: `key = "${ctpSubscriptionKey}"`,
       },
     })
     .execute();
@@ -18,7 +15,7 @@ export async function deleteChangedStoreSubscription(apiRoot) {
 
     await apiRoot
       .subscriptions()
-      .withKey({ key: PRODUCT_CHANGE_SUBSCRIPTION_KEY })
+      .withKey({ key: ctpSubscriptionKey })
       .delete({
         queryArgs: {
           version: subscription.version,
@@ -31,15 +28,16 @@ export async function deleteChangedStoreSubscription(apiRoot) {
 export async function createChangedStoreSubscription(
   apiRoot,
   topicName,
-  projectId
+  projectId,
+  ctpSubscriptionKey
 ) {
-  await deleteChangedStoreSubscription(apiRoot);
+  await deleteChangedStoreSubscription(apiRoot, ctpSubscriptionKey);
 
   await apiRoot
     .subscriptions()
     .post({
       body: {
-        key: PRODUCT_CHANGE_SUBSCRIPTION_KEY,
+        key: ctpSubscriptionKey,
         destination: {
           type: 'GoogleCloudPubSub',
           topic: topicName,
