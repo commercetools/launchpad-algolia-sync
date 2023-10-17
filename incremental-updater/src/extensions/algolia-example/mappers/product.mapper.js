@@ -78,7 +78,7 @@ function transformVariant(variant, locale) {
     prices: !prices ? undefined : prices,
     discountedPrices: !discountedPrices ? undefined : discountedPrices,
     isOnStock: variant.availability?.isOnStock,
-    availableQuantity: variant.availability?.availableQuantity
+    availableQuantity: variant.availability?.availableQuantity,
   };
   result = JSON.parse(JSON.stringify(result));
   return result;

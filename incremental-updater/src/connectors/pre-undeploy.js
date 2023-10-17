@@ -2,11 +2,14 @@ import { createApiRoot } from '../clients/create.client.js';
 
 import { deleteChangedStoreSubscription } from './actions.js';
 
-const CTP_PRODUCT_CHANGE_SUBSCRIPTION_KEY = 'CTP_PRODUCT_CHANGE_SUBSCRIPTION_KEY';
+const CTP_PRODUCT_CHANGE_SUBSCRIPTION_KEY =
+  'CTP_PRODUCT_CHANGE_SUBSCRIPTION_KEY';
 
 async function preUndeploy(properties) {
   const apiRoot = createApiRoot();
-  const ctpSubscriptionKey = properties.get(CTP_PRODUCT_CHANGE_SUBSCRIPTION_KEY);
+  const ctpSubscriptionKey = properties.get(
+    CTP_PRODUCT_CHANGE_SUBSCRIPTION_KEY
+  );
   await deleteChangedStoreSubscription(apiRoot, ctpSubscriptionKey);
 }
 
