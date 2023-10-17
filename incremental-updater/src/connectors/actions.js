@@ -1,4 +1,7 @@
-export async function deleteChangedStoreSubscription(apiRoot, ctpSubscriptionKey) {
+export async function deleteChangedStoreSubscription(
+  apiRoot,
+  ctpSubscriptionKey
+) {
   const {
     body: { results: subscriptions },
   } = await apiRoot
