@@ -85,8 +85,6 @@ deployAs:
         - key: CTP_PRODUCT_CHANGE_SUBSCRIPTION_KEY
           description: Key of commercetools subscription which subscribes any change in commercetools product resources
       securedConfiguration:
-        - key: CTP_STORE_KEY
-          description: Unique key of commercetools Store
         - key: CTP_PROJECT_KEY
           description: commercetools project key
         - key: CTP_CLIENT_ID
