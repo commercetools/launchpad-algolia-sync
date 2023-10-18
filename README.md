@@ -14,7 +14,7 @@ This connector uses the [Product type](https://docs.commercetools.com/api/projec
 
 ## Prerequisite
 #### 1. commercetools composable commerce API client
-Users are expected to create API client responsible for fetching product, store and product selection details from composable commerce project, API client should have enough scope to be able to do so. These API client details are taken as input as an environment variable/ configuration for connect. Details of compsable commerce project can be provided as environment variables (configuration for connect) `CTP_PROJECT_KEY` , `CTP_CLIENT_ID`, `CTP_CLIENT_SECRET`, `CTP_SCOPE`, `CTP_REGION`. For details, please read [Deployment Configuration](./README.md#Deployment Configuration).
+Users are expected to create API client responsible for fetching product details from composable commerce project, API client should have enough scope to be able to do so. These API client details are taken as input as an environment variable/ configuration for connect. Details of compsable commerce project can be provided as environment variables (configuration for connect) `CTP_PROJECT_KEY` , `CTP_CLIENT_ID`, `CTP_CLIENT_SECRET`, `CTP_SCOPE`, `CTP_REGION`. For details, please read [Deployment Configuration](./README.md#Deployment Configuration).
 
 
 #### 2. Algolia index creation
