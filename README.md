@@ -95,6 +95,8 @@ deployAs:
           description: commercetools client scope
         - key: CTP_REGION
           description: Region of commercetools project
+        - key: THEGOODSTORE_LOCALE
+          description: Locale used in thegoodstore site. It includes 'en-US', 'de-DE'
         - key: SEARCH_PLATFORM_CONFIG
           description: Escaped JSON object including credentails to search platform and other settings
 ```
