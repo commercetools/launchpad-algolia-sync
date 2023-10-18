@@ -2,7 +2,7 @@
 # goodstore-coco-algolia-sync
 This is a connect application which aims at synchronizing products between [goodstore coFE template](https://github.com/frontastic-developers/customer-thegoodstore) and algolia search index. This repository is developed based on [connect-search-ingestion-template](https://github.com/commercetools/connect-search-ingestion-template)
 
-This connector uses the [Product type](https://docs.commercetools.com/api/projects/productTypes) and [Product](https://docs.commercetools.com/api/projects/products) data models from composable commerce which can be used for mapping and syncing data into Algolia index to power frontend. Connector is based on asynchronous [Subscriptions](https://docs.commercetools.com/api/projects/subscriptions) to keep the search indices up to date.
+This connector uses the [Product type](https://docs.commercetools.com/api/projects/productTypes) and [Product](https://docs.commercetools.com/api/projects/products) data models from composable commerce which can be used for mapping and syncing data into Algolia index to power frontend. Connector is based on asynchronous [Subscriptions](https://docs.commercetools.com/api/projects/subscriptions) to keep the search index up to date.
 
 ## Connector Features
 - NodeJS supported.
