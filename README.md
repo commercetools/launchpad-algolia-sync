@@ -18,7 +18,7 @@ Users are expected to create API client responsible for fetching product details
 
 
 #### 2. Algolia index creation
-Users are expected to create search index in Algolia . The index details are taken as input as an environment variable / configuration for connect. Details of search index can be provided as environment variables (configuration for connect) `SEARCH_PLATFORM_CONFIG`.For details, please read [Deployment Configuration](./README.md#Deployment Configuration).
+Users are expected to create search index in Algolia. The index details are taken as input as an environment variable / configuration for connect. Details of search index can be provided as environment variables (configuration for connect) `SEARCH_PLATFORM_CONFIG`. For details, please read [Deployment Configuration](./README.md#Deployment Configuration).
 
  
 ## Getting started
