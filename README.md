@@ -81,6 +81,9 @@ deployAs:
       postDeploy: npm install && npm run connector:post-deploy
       preUndeploy: npm install && npm run connector:pre-undeploy
     configuration:
+      standardConfiguration:
+        - key: CTP_PRODUCT_CHANGE_SUBSCRIPTION_KEY
+          description: Key of commercetools subscription which subscribes any change in commercetools product resources
       securedConfiguration:
         - key: CTP_STORE_KEY
           description: Unique key of commercetools Store
