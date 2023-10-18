@@ -25,17 +25,20 @@ export default function map(product, locale) {
   return mappedProduct;
 }
 
-function transformAttribute(attribute, locale) {
-  if (attribute.name && attribute.value[locale])
-    return {
-      [attribute.name]: attribute.value[locale],
-    };
-}
-
 function transformAttributes(attributes, locale) {
-  return attributes
-    .map((attribute) => transformAttribute(attribute, locale))
-    .filter((attribute) => attribute !== undefined);
+  let resultAttributes = {};
+  attributes
+    .filter((attribute) => attribute !== undefined)
+    .forEach((attribute) => {
+      if (attribute.name && attribute.value[locale])
+        resultAttributes[attribute.name] = attribute.value[locale];
+      else if (attribute.name && attribute.value.key)
+        resultAttributes[attribute.name] = {
+          key: attribute.value.key,
+          label: attribute.value.label[locale],
+        };
+    });
+  return resultAttributes;
 }
 
 function transformPrices(prices) {
