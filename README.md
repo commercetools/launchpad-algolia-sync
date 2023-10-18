@@ -107,6 +107,8 @@ Here you can see the details about various variables in configuration
 - CTP_CLIENT_SECRET: The client secret of commercetools user account. It is used in commercetools client to communicate with commercetools platform via SDK.
 - CTP_SCOPE: The scope constrains the endpoints to which the commercetools client has access, as well as the read/write access right to an endpoint.
 - CTP_REGION: As the commercetools APIs are provided in six different region, it defines the region which your commercetools user account belongs to.
+- CTP_PRODUCT_CHANGE_SUBSCRIPTION_KEY: Key of commercetools subscription which subscribes any change in commercetools product resources. Remind that it needs to be unique per deployed connector application. That means it cannot be shared among multiple applications and Algolia search indices.
+- THEGOODSTORE_LOCALE: Locale in `goodstore`. It includes 'en-US' and 'de-DE'. Since it is suggested each search index supports only single locale, locale code requires to be provided as environment variable for connector.
 - SEARCH_PLATFORM_CONFIG: It defines the configurations required by the Algolia index, such as credentials, Algolia index unique identifier, etc.
   Following is a sample JSON object of this variable.
   
