@@ -14,11 +14,11 @@ This connector uses the [Product type](https://docs.commercetools.com/api/projec
 
 ## Prerequisite
 #### 1. commercetools composable commerce API client
-Users are expected to create API client responsible for fetching product details from composable commerce project, API client should have enough scope to be able to do so. These API client details are taken as input as an environment variable/ configuration for connect. Details of compsable commerce project can be provided as environment variables (configuration for connect) `CTP_PROJECT_KEY` , `CTP_CLIENT_ID`, `CTP_CLIENT_SECRET`, `CTP_SCOPE`, `CTP_REGION`. For details, please read [Deployment Configuration](./README.md#Deployment Configuration).
+Users are expected to create API client responsible for fetching product details from composable commerce project, API client should have enough scope to be able to do so. These API client details are taken as input as an environment variable/ configuration for connect. Details of composable commerce project can be provided as environment variables (configuration for connect) `CTP_PROJECT_KEY` , `CTP_CLIENT_ID`, `CTP_CLIENT_SECRET`, `CTP_SCOPE`, `CTP_REGION`. For details, please read [Deployment Configuration](./README.md#deployment-configuration).
 
 
 #### 2. Algolia index creation
-Users are expected to create search index in Algolia. The index details are taken as input as an environment variable / configuration for connect. Details of search index can be provided as environment variables (configuration for connect) `SEARCH_PLATFORM_CONFIG`. For details, please read [Deployment Configuration](./README.md#Deployment Configuration).
+Users are expected to create search index in Algolia. The index details are taken as input as an environment variable / configuration for connect. Details of search index can be provided as environment variables (configuration for connect) `SEARCH_PLATFORM_CONFIG`. For details, please read [Deployment Configuration](./README.md#deployment-configuration).
 
  
 ## Getting started
@@ -29,7 +29,7 @@ The connector contains two separated modules :
 
 #### 1. Develop your search-specific needs 
 While extending GoodStore data model in composable commerce, users need to also extend this connector with the following tasks
-- Data Mapping: Implementaion to transform the product type & product resources from commercetools structure to users-desired structure for the Algolia index.
+- Data Mapping: Implementation to transform the product type & product resources from commercetools structure to users-desired structure for the Algolia index.
 - Data Persistence: Implementation to save/remove new mapped product data to the specific Algolia index using Algolia libraries included in the connector.
 
 #### 2. Register as connector in commercetools Connect
@@ -65,7 +65,7 @@ deployAs:
         - key: CTP_CLIENT_ID
           description: commercetools client ID
         - key: CTP_CLIENT_SECRET
-          description: commercetools client secreet
+          description: commercetools client secret
         - key: CTP_SCOPE
           description: commercetools client scope
         - key: CTP_REGION
@@ -73,7 +73,7 @@ deployAs:
         - key: THEGOODSTORE_LOCALE
           description: Locale used in thegoodstore site. It includes 'en-US', 'de-DE'
         - key: SEARCH_PLATFORM_CONFIG
-          description: Escaped JSON object including credentails to search platform and other settings
+          description: Escaped JSON object including credentials to search platform and other settings
   - name: incremental-updater
     applicationType: event
     endpoint: /deltaSync
@@ -90,7 +90,7 @@ deployAs:
         - key: CTP_CLIENT_ID
           description: commercetools client ID
         - key: CTP_CLIENT_SECRET
-          description: commercetools client secreet
+          description: commercetools client secret
         - key: CTP_SCOPE
           description: commercetools client scope
         - key: CTP_REGION
@@ -98,7 +98,7 @@ deployAs:
         - key: THEGOODSTORE_LOCALE
           description: Locale used in thegoodstore site. It includes 'en-US', 'de-DE'
         - key: SEARCH_PLATFORM_CONFIG
-          description: Escaped JSON object including credentails to search platform and other settings
+          description: Escaped JSON object including credentials to search platform and other settings
 ```
 
 Here you can see the details about various variables in configuration
@@ -114,15 +114,15 @@ Here you can see the details about various variables in configuration
   
     ```
     {
-        SEARCH_INDEX_CREDENTIAL_ID: xxx,
-        SEARCH_INDEX_CREDENTIAL_SECRET: yyy,
-        SEARCH_INDEX_ID: zzz
+        applicationId: xxx,
+        searchApiKey: yyy,
+        index: zzz
     }
 
     ```
   The value of this configuration variable needs to be in escaped JSON format. Hence, based on the sample above, the expected value of this variable becomes
   ```
-  '{ "SEARCH_INDEX_CREDENTIAL_ID": "xxx", "SEARCH_INDEX_CREDENTIAL_SECRET": "yyy", "SEARCH_INDEX_ID": "zzz" }'
+  '{ "applicationId": "xxx", "searchApiKey": "yyy", "index": "zzz" }'
   ```
 - CTP_STORE_KEY : Only used in incremental updater. It specifies the key of commercetools store so that connector can look up the modified product under the specific store in commercetools platform.
 
