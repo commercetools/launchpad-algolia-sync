@@ -114,15 +114,15 @@ Here you can see the details about various variables in configuration
   
     ```
     {
-        SEARCH_INDEX_CREDENTIAL_ID: xxx,
-        SEARCH_INDEX_CREDENTIAL_SECRET: yyy,
-        SEARCH_INDEX_ID: zzz
+        applicationId: xxx,
+        searchApiKey: yyy,
+        index: zzz
     }
 
     ```
   The value of this configuration variable needs to be in escaped JSON format. Hence, based on the sample above, the expected value of this variable becomes
   ```
-  '{ "SEARCH_INDEX_CREDENTIAL_ID": "xxx", "SEARCH_INDEX_CREDENTIAL_SECRET": "yyy", "SEARCH_INDEX_ID": "zzz" }'
+  '{ "applicationId": "xxx", "searchApiKey": "yyy", "index": "zzz" }'
   ```
 - CTP_STORE_KEY : Only used in incremental updater. It specifies the key of commercetools store so that connector can look up the modified product under the specific store in commercetools platform.
 
