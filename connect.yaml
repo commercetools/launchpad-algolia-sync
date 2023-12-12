@@ -11,7 +11,7 @@ deployAs:
         - key: CTP_CLIENT_ID
           description: Commercetools client ID
         - key: CTP_CLIENT_SECRET
-          description: Commercetools client secreet
+          description: Commercetools client secret
         - key: CTP_SCOPE
           description: Commercetools client scope
         - key: CTP_REGION
@@ -19,7 +19,7 @@ deployAs:
         - key: THEGOODSTORE_LOCALE
           description: Locale used in thegoodstore site. It includes 'en-US', 'en-GB', 'de-DE'
         - key: SEARCH_PLATFORM_CONFIG
-          description: Escaped JSON object including credentails to search platform and other settings
+          description: Escaped JSON object including credentials to search platform and other settings
   - name: incremental-updater
     applicationType: event
     endpoint: /deltaSync
@@ -36,7 +36,7 @@ deployAs:
         - key: CTP_CLIENT_ID
           description: Commercetools client ID
         - key: CTP_CLIENT_SECRET
-          description: Commercetools client secreet
+          description: Commercetools client secret
         - key: CTP_SCOPE
           description: Commercetools client scope
         - key: CTP_REGION
@@ -44,4 +44,4 @@ deployAs:
         - key: THEGOODSTORE_LOCALE
           description: Locale used in thegoodstore site. It includes 'en-US', 'en-GB', 'de-DE'
         - key: SEARCH_PLATFORM_CONFIG
-          description: Escaped JSON object including credentails to search platform and other settings
+          description: Escaped JSON object including credentials to search platform and other settings
