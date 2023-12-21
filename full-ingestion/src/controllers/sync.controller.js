@@ -16,10 +16,7 @@ async function syncProducts() {
   const productProjectionsToBeSynced = await getProductProjections();
 
   //Clean up search index before full sychronization
-  const productIdsToBeRemoved = productProjectionsToBeSynced.map(
-    (product) => product.id
-  );
-  await removeProducts(productIdsToBeRemoved);
+  await removeProducts();
 
   logger.info(
     `${productProjectionsToBeSynced.length} product(s) to be synced to search index.`

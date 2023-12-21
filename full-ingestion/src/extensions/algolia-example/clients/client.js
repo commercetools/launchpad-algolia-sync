@@ -3,6 +3,7 @@ import { config } from '../configurations/config.js';
 import { constants } from '../configurations/constants.js';
 
 import { default as productMapping } from '../mappers/product.mapper.js';
+import { logger } from '../../../utils/logger.utils.js';
 
 export const remove = async (objectID) => {
   const client = algoliasearch(config.applicationId, config.searchApiKey);
@@ -10,10 +11,14 @@ export const remove = async (objectID) => {
   await index.deleteObject(objectID);
 };
 
-export const removeProducts = async (objectIDs) => {
+export const removeProducts = async () => {
   const client = algoliasearch(config.applicationId, config.searchApiKey);
   const index = client.initIndex(config.index);
-  await index.deleteObjects(objectIDs);
+  try {
+    await index.clearObjects;
+  } catch (e) {
+    logger.error(`Error clearing objects(Products) from Index, Skipping the step!!`, e);
+  }
 };
 
 export default async function save(products, locale) {
