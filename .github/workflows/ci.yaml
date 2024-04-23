@@ -12,7 +12,7 @@ jobs:
       CTP_PROJECT_KEY: ${{ secrets.CTP_PROJECT_KEY }}
       CTP_SCOPE: ${{ secrets.CTP_SCOPE }}
       CTP_REGION: ${{ secrets.CTP_REGION }}
-      THEGOODSTORE_LOCALE: ${{ secrets.THEGOODSTORE_LOCALE }}
+      LOCALE: ${{ secrets.LOCALE }}
       SEARCH_PLATFORM_CONFIG: ${{ secrets.SEARCH_PLATFORM_CONFIG }}
     defaults:
       run:
@@ -44,7 +44,7 @@ jobs:
       CTP_PROJECT_KEY: ${{ secrets.CTP_PROJECT_KEY }}
       CTP_SCOPE: ${{ secrets.CTP_SCOPE }}
       CTP_REGION: ${{ secrets.CTP_REGION }}
-      THEGOODSTORE_LOCALE: ${{ secrets.THEGOODSTORE_LOCALE }}
+      LOCALE: ${{ secrets.LOCALE }}
       SEARCH_PLATFORM_CONFIG: ${{ secrets.SEARCH_PLATFORM_CONFIG }}
     defaults:
       run:
