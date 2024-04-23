@@ -1,6 +1,6 @@
 
-# goodstore-algolia-sync
-This is a connect application which aims at synchronizing products between [goodstore coFE template](https://github.com/frontastic-developers/customer-thegoodstore) and algolia search index. This repository is developed based on [connect-search-ingestion-template](https://github.com/commercetools/connect-search-ingestion-template)
+# launchpad-algolia-sync
+This is a connect application which aims at synchronizing products between `Launchpad template` and algolia search index. This repository is developed based on [connect-search-ingestion-template](https://github.com/commercetools/connect-search-ingestion-template)
 
 This connector uses the [Product type](https://docs.commercetools.com/api/projects/productTypes) and [Product](https://docs.commercetools.com/api/projects/products) data models from composable commerce which can be used for mapping and syncing data into Algolia index to power frontend. Connector is based on asynchronous [Subscriptions](https://docs.commercetools.com/api/projects/subscriptions) to keep the search index up to date.
 
@@ -28,7 +28,7 @@ The connector contains two separated modules :
 
 
 #### 1. Develop your search-specific needs 
-While extending GoodStore data model in composable commerce, users need to also extend this connector with the following tasks
+While extending Launchpad data model in composable commerce, users need to also extend this connector with the following tasks
 - Data Mapping: Implementation to transform the product type & product resources from commercetools structure to users-desired structure for the Algolia index.
 - Data Persistence: Implementation to save/remove new mapped product data to the specific Algolia index using Algolia libraries included in the connector.
 
@@ -70,8 +70,8 @@ deployAs:
           description: commercetools client scope
         - key: CTP_REGION
           description: Region of commercetools project
-        - key: THEGOODSTORE_LOCALE
-          description: Locale used in thegoodstore site. It includes 'en-US', 'de-DE'
+        - key: LOCALE
+          description: Locale used in launchpad site. It includes 'en-US', 'de-DE'
         - key: SEARCH_PLATFORM_CONFIG
           description: Escaped JSON object including credentials to search platform and other settings
   - name: incremental-updater
@@ -95,8 +95,8 @@ deployAs:
           description: commercetools client scope
         - key: CTP_REGION
           description: Region of commercetools project
-        - key: THEGOODSTORE_LOCALE
-          description: Locale used in thegoodstore site. It includes 'en-US', 'de-DE'
+        - key: LOCALE
+          description: Locale used in launchpad site. It includes 'en-US', 'de-DE'
         - key: SEARCH_PLATFORM_CONFIG
           description: Escaped JSON object including credentials to search platform and other settings
 ```
@@ -108,7 +108,7 @@ Here you can see the details about various variables in configuration
 - CTP_SCOPE: The scope constrains the endpoints to which the commercetools client has access, as well as the read/write access right to an endpoint.
 - CTP_REGION: As the commercetools APIs are provided in six different region, it defines the region which your commercetools user account belongs to.
 - CTP_PRODUCT_CHANGE_SUBSCRIPTION_KEY: Key of commercetools subscription which subscribes any change in commercetools product resources. Remind that it needs to be unique per deployed connector application. That means it cannot be shared among multiple applications and Algolia search indices.
-- THEGOODSTORE_LOCALE: Locale in `goodstore`. It includes 'en-US' and 'de-DE'. Since it is suggested each search index supports only single locale, locale code requires to be provided as environment variable for connector.
+- LOCALE: Locale in `launchpad`. It includes 'en-US' and 'de-DE'. Since it is suggested each search index supports only single locale, locale code requires to be provided as environment variable for connector.
 - SEARCH_PLATFORM_CONFIG: It defines the configurations required by the Algolia index, such as credentials, Algolia index unique identifier, etc.
   Following is a sample JSON object of this variable.
   

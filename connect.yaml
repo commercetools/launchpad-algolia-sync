@@ -16,8 +16,8 @@ deployAs:
           description: Commercetools client scope
         - key: CTP_REGION
           description: Region of Commercetools project
-        - key: THEGOODSTORE_LOCALE
-          description: Locale used in thegoodstore site. It includes 'en-US', 'en-GB', 'de-DE'
+        - key: LOCALE
+          description: Locale used in the launchpad site. It includes 'en-US', 'en-GB', 'de-DE'
         - key: SEARCH_PLATFORM_CONFIG
           description: Escaped JSON object including credentials to search platform and other settings
   - name: incremental-updater
@@ -41,7 +41,7 @@ deployAs:
           description: Commercetools client scope
         - key: CTP_REGION
           description: Region of Commercetools project
-        - key: THEGOODSTORE_LOCALE
-          description: Locale used in thegoodstore site. It includes 'en-US', 'en-GB', 'de-DE'
+        - key: LOCALE
+          description: Locale used in the launchpad site. It includes 'en-US', 'en-GB', 'de-DE'
         - key: SEARCH_PLATFORM_CONFIG
           description: Escaped JSON object including credentials to search platform and other settings
