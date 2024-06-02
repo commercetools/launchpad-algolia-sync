@@ -15,7 +15,7 @@ export const removeProducts = async () => {
   const client = algoliasearch(config.applicationId, config.searchApiKey);
   const index = client.initIndex(config.index);
   try {
-    await index.clearObjects;
+    await index.clearObjects();
   } catch (e) {
     logger.error(`Error clearing objects(Products) from Index, Skipping the step!!`, e);
   }
