@@ -1,0 +1,15 @@
+# Please see the documentation for all configuration options:
+# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+
+version: 2
+updates:
+  # Enable version updates for npm
+  - package-ecosystem: "npm"
+    directory: "/full-export"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "npm"
+    directory: "/incremental-updater"
+    schedule:
+      interval: "daily"
